@@ -7,6 +7,7 @@ from utils import countdown, read_file
 from statistics import save_score
 from typing_test import accuracy
 from tkinter import messagebox
+from statistics import show_statistics
 
 sentences = read_file("sentences.txt")
 def load_highest_wpm():
@@ -130,7 +131,45 @@ def countdown(count):
         start_time = time.time()
 
         app.after(1000, lambda: countdown_label.configure(text=""))
+def view_statistics():
+    import csv
+    import os
 
+    if not os.path.isfile("scores.csv"):
+        messagebox.showinfo("Statistics", "No statistics available yet.")
+        return
+
+    total_games = 0
+    total_wpm = 0
+    highest_wpm_value = 0
+    best_accuracy = 0
+
+    with open("scores.csv", "r") as file:
+        reader = csv.DictReader(file)
+
+        for row in reader:
+            total_games += 1
+
+            wpm = float(row["WPM"])
+            accuracy_value = float(row["Accuracy"])
+
+            total_wpm += wpm
+            highest_wpm_value = max(highest_wpm_value, wpm)
+            best_accuracy = max(best_accuracy, accuracy_value)
+
+    if total_games == 0:
+        messagebox.showinfo("Statistics", "No statistics available yet.")
+        return
+
+    average_wpm = total_wpm / total_games
+
+    messagebox.showinfo(
+        "Typing Statistics",
+        f"Games Played: {total_games}\n"
+        f"Highest WPM: {highest_wpm_value:.2f}\n"
+        f"Average WPM: {average_wpm:.2f}\n"
+        f"Best Accuracy: {best_accuracy:.2f}%"
+    )
 #Adding buttons
 button_frame = ctk.CTkFrame(app)
 
@@ -205,6 +244,13 @@ submit_button = ctk.CTkButton(
 
 submit_button.pack(side="left", padx=10)
 
+stats_button = ctk.CTkButton(
+    button_frame,
+    text="View Statistics",
+    command=view_statistics
+)
+
+stats_button.pack(side="left", padx=10)
 
 exit_button = ctk.CTkButton(
     button_frame,
