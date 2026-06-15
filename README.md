@@ -85,7 +85,19 @@ Through this project, I learned how to:
 * Add difficulty levels
 * Add WPM graph
 * Add SQLite database support
+## Screenshots
 
+### Main Interface
+![Main Interface](screenshots/main.png)
+
+### Countdown
+![Countdown](screenshots/countdown.png)
+
+### Results Popup
+![Results Popup](screenshots/results.png)
+
+### Statistics Popup
+![Statistics Popup](screenshots/statistics.png)
 ## Author
 
 **Satrasala Sreenidhi**
