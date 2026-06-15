@@ -96,8 +96,7 @@ Through this project, I learned how to:
 ### Results Popup
 ![Results Popup](screenshots/results.png)
 
-### Statistics Popup
-![Statistics Popup](screenshots/statistics.png)
+
 ## Author
 
 **Satrasala Sreenidhi**
